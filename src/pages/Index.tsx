@@ -11,6 +11,7 @@ import PerformanceAnalysis from '../components/sections/PerformanceAnalysis';
 import DatabaseSchema from '../components/DatabaseSchema';
 import ErrorAnalysis from '../components/ErrorAnalysis';
 import Footer from '../components/Footer';
+import UsabilityTesting from '../components/sections/UsabilityTesting';
 
 // Define all available sections
 const sections = [
@@ -20,6 +21,7 @@ const sections = [
   { id: 'backend', title: 'Backend Performance', component: BackendPerformance },
   { id: 'frontend', title: 'Frontend Optimization', component: FrontendOptimization },
   { id: 'infrastructure', title: 'Infrastructure & Scaling', component: InfrastructureScaling },
+  { id: 'usability', title: 'Usability Testing Plan', component: UsabilityTesting },
   { id: 'schema', title: 'Database Schema', component: DatabaseSchema },
   { id: 'error', title: 'Error Analysis', component: ErrorAnalysis },
 ];
