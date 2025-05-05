@@ -1,11 +1,51 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from 'react';
+import GuideHeader from '../components/GuideHeader';
+import SectionNavigation from '../components/SectionNavigation';
+import PerformanceFundamentals from '../components/sections/PerformanceFundamentals';
+import DatabaseOptimization from '../components/sections/DatabaseOptimization';
+import BackendPerformance from '../components/sections/BackendPerformance';
+import FrontendOptimization from '../components/sections/FrontendOptimization';
+import InfrastructureScaling from '../components/sections/InfrastructureScaling';
+import Footer from '../components/Footer';
+
+// Define all available sections
+const sections = [
+  { id: 'fundamentals', title: 'Performance Fundamentals', component: PerformanceFundamentals },
+  { id: 'database', title: 'Database Optimization', component: DatabaseOptimization },
+  { id: 'backend', title: 'Backend Performance', component: BackendPerformance },
+  { id: 'frontend', title: 'Frontend Optimization', component: FrontendOptimization },
+  { id: 'infrastructure', title: 'Infrastructure & Scaling', component: InfrastructureScaling },
+];
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('fundamentals');
+  
+  // Find the active section component to render
+  const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceFundamentals;
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-50">
+      <GuideHeader />
+      
+      <div className="container mx-auto px-4 py-6 md:px-6">
+        <main className="flex flex-col lg:flex-row gap-8">
+          {/* Side Navigation */}
+          <div className="lg:w-1/4">
+            <SectionNavigation 
+              sections={sections} 
+              activeSection={activeSection} 
+              setActiveSection={setActiveSection} 
+            />
+          </div>
+          
+          {/* Main Content */}
+          <div className="lg:w-3/4 bg-white rounded-lg shadow-md p-6">
+            <ActiveSectionComponent />
+          </div>
+        </main>
+        
+        <Footer />
       </div>
     </div>
   );
