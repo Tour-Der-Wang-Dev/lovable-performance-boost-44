@@ -25,7 +25,7 @@ function ProductItem({ product, onAddToCart }) {
     <div className="product-card">
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
-      <p>${product.price}</p>
+      <p>\${product.price}</p>
       <button onClick={() => onAddToCart(product.id)}>
         Add to Cart
       </button>
@@ -43,7 +43,7 @@ const ProductItem = React.memo(function ProductItem({
     <div className="product-card">
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
-      <p>${product.price}</p>
+      <p>\${product.price}</p>
       <button onClick={() => onAddToCart(product.id)}>
         Add to Cart
       </button>
