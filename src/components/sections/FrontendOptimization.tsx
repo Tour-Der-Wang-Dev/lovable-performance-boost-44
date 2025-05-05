@@ -2,6 +2,11 @@ import CodeBlock from "../CodeBlock";
 import PerformanceMetric from "../PerformanceMetric";
 
 const FrontendOptimization = () => {
+  // Define missing functions and variables to prevent the errors
+  const calculateDiscount = (price: number) => {
+    return price * 0.1; // Sample discount calculation
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 text-gray-800">4. Frontend Optimization</h2>
