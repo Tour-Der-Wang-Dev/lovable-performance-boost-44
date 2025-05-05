@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import GuideHeader from '@/components/GuideHeader';
 import SectionNavigation from '@/components/SectionNavigation';
@@ -12,6 +11,7 @@ import DatabaseSchema from '@/components/DatabaseSchema';
 import ErrorAnalysis from '@/components/ErrorAnalysis';
 import UsabilityTestingPlan from '@/components/UsabilityTestingPlan';
 import Footer from '@/components/Footer';
+import Navbar from "@/components/Navbar";
 
 // Define the available sections
 type Section = {
@@ -41,8 +41,8 @@ const Index = () => {
   const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceFundamentals;
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <GuideHeader />
+    <div className="min-h-screen bg-white">
+      <Navbar />
       
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
