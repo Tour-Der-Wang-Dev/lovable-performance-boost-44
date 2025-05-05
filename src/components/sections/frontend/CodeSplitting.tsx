@@ -5,76 +5,135 @@ import CodeBlock from "../../CodeBlock";
 const CodeSplitting = () => {
   return (
     <div className="mb-8">
-      <h3 className="text-xl font-semibold mb-4 text-orange-600">Code Splitting Implementation</h3>
+      <h3 className="text-xl font-semibold mb-4 text-orange-600">Code Splitting Strategies</h3>
       
       <p className="mb-4 text-gray-700">
-        Code splitting is a crucial technique for large applications, allowing you to load only the code needed for the current view.
+        Code splitting is a technique that breaks your bundle into smaller chunks, loading only what's necessary.
+        This significantly improves initial load time and time-to-interactive.
       </p>
       
-      <CodeBlock
-        language="jsx"
-        title="React Router with Code Splitting"
-        code={`import React, { Suspense, lazy } from 'react';
+      <div className="mb-6">
+        <h4 className="font-semibold mb-2">React.lazy and Suspense</h4>
+        <CodeBlock
+          language="jsx"
+          title="Route-based Code Splitting"
+          code={`// Before code splitting
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoadingSpinner from './components/LoadingSpinner';
-import ErrorBoundary from './components/ErrorBoundary';
-
-// Before: Importing all components directly
-// import Dashboard from './pages/Dashboard';
-// import ProductList from './pages/ProductList';
-// import ProductDetail from './pages/ProductDetail';
-// import Checkout from './pages/Checkout';
-
-// After: Using lazy loading for route-based code splitting
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const ProductList = lazy(() => import('./pages/ProductList'));
-const ProductDetail = lazy(() => 
-  import('./pages/ProductDetail')
-    // Add prefetch for critical chunks
-    .then(module => {
-      // Prefetch product reviews component
-      import('./components/ProductReviews');
-      return module;
-    })
-);
-const Checkout = lazy(() => import('./pages/Checkout'));
-
-// Preload components on hover/focus of links
-const preloadComponent = (importFn) => {
-  return () => {
-    importFn();
-  };
-};
+import Dashboard from './pages/Dashboard';
+import Analytics from './pages/Analytics';
+import Settings from './pages/Settings';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
     <BrowserRouter>
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/products" element={<ProductList />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/checkout" element={<Checkout />} />
-          </Routes>
-        </Suspense>
-      </ErrorBoundary>
-      
-      {/* Usage example for link preloading */}
-      <nav>
-        <a 
-          href="/products"
-          onMouseEnter={preloadComponent(() => import('./pages/ProductList'))}
-          onFocus={preloadComponent(() => import('./pages/ProductList'))}
-        >
-          Products
-        </a>
-      </nav>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/profile" element={<UserProfile />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+// After code splitting with React.lazy and Suspense
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoadingSpinner from './components/LoadingSpinner';
+
+// Lazily load route components
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Analytics = lazy(() => import('./pages/Analytics'));
+const Settings = lazy(() => import('./pages/Settings'));
+const UserProfile = lazy(() => import('./pages/UserProfile'));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<UserProfile />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }`}
-        description="This implementation uses React's lazy and Suspense for route-based code splitting, with added optimizations like link preloading."
-      />
+        />
+      </div>
+      
+      <div className="mb-6">
+        <h4 className="font-semibold mb-2">Component-Level Code Splitting</h4>
+        <CodeBlock
+          language="jsx"
+          title="On-demand Component Loading"
+          code={`// Before optimization
+import React, { useState } from 'react';
+import HighlySophisticatedChart from './HighlySophisticatedChart';
+import ComplexDataTable from './ComplexDataTable';
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState('overview');
+  
+  return (
+    <div>
+      <nav className="tabs">
+        <button onClick={() => setActiveTab('overview')}>Overview</button>
+        <button onClick={() => setActiveTab('analytics')}>Analytics</button>
+        <button onClick={() => setActiveTab('reports')}>Reports</button>
+      </nav>
+      
+      <div className="content">
+        {activeTab === 'overview' && <div>Overview Content</div>}
+        {activeTab === 'analytics' && <HighlySophisticatedChart />}
+        {activeTab === 'reports' && <ComplexDataTable />}
+      </div>
+    </div>
+  );
+}
+
+// After optimization with component-level code splitting
+import React, { useState, Suspense, lazy } from 'react';
+
+const HighlySophisticatedChart = lazy(() => 
+  import('./HighlySophisticatedChart')
+);
+const ComplexDataTable = lazy(() => 
+  import('./ComplexDataTable')
+);
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState('overview');
+  
+  return (
+    <div>
+      <nav className="tabs">
+        <button onClick={() => setActiveTab('overview')}>Overview</button>
+        <button onClick={() => setActiveTab('analytics')}>Analytics</button>
+        <button onClick={() => setActiveTab('reports')}>Reports</button>
+      </nav>
+      
+      <div className="content">
+        {activeTab === 'overview' && <div>Overview Content</div>}
+        {activeTab === 'analytics' && (
+          <Suspense fallback={<div>Loading chart...</div>}>
+            <HighlySophisticatedChart />
+          </Suspense>
+        )}
+        {activeTab === 'reports' && (
+          <Suspense fallback={<div>Loading table...</div>}>
+            <ComplexDataTable />
+          </Suspense>
+        )}
+      </div>
+    </div>
+  );
+}`}
+        />
+      </div>
     </div>
   );
 };

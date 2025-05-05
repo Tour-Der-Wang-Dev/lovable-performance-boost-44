@@ -1,60 +1,68 @@
 
-import { useState } from 'react';
-import GuideHeader from '../components/GuideHeader';
-import SectionNavigation from '../components/SectionNavigation';
-import PerformanceFundamentals from '../components/sections/PerformanceFundamentals';
-import DatabaseOptimization from '../components/sections/DatabaseOptimization';
-import BackendPerformance from '../components/sections/BackendPerformance';
-import FrontendOptimization from '../components/sections/FrontendOptimization';
-import InfrastructureScaling from '../components/sections/InfrastructureScaling';
-import PerformanceAnalysis from '../components/sections/PerformanceAnalysis';
-import DatabaseSchema from '../components/DatabaseSchema';
-import ErrorAnalysis from '../components/ErrorAnalysis';
-import Footer from '../components/Footer';
-import UsabilityTesting from '../components/sections/UsabilityTesting';
+import React, { useState } from 'react';
+import GuideHeader from '@/components/GuideHeader';
+import SectionNavigation from '@/components/SectionNavigation';
+import PerformanceFundamentals from '@/components/sections/PerformanceFundamentals';
+import DatabaseOptimization from '@/components/sections/DatabaseOptimization';
+import BackendPerformance from '@/components/sections/BackendPerformance';
+import FrontendOptimization from '@/components/sections/FrontendOptimization';
+import InfrastructureScaling from '@/components/sections/InfrastructureScaling';
+import PerformanceAnalysis from '@/components/sections/PerformanceAnalysis';
+import DatabaseSchema from '@/components/DatabaseSchema';
+import ErrorAnalysis from '@/components/ErrorAnalysis';
+import UsabilityTestingPlan from '@/components/UsabilityTestingPlan';
+import Footer from '@/components/Footer';
 
-// Define all available sections
-const sections = [
-  { id: 'analysis', title: 'Performance Analysis Report', component: PerformanceAnalysis },
-  { id: 'fundamentals', title: 'Performance Fundamentals', component: PerformanceFundamentals },
-  { id: 'database', title: 'Database Optimization', component: DatabaseOptimization },
-  { id: 'backend', title: 'Backend Performance', component: BackendPerformance },
-  { id: 'frontend', title: 'Frontend Optimization', component: FrontendOptimization },
-  { id: 'infrastructure', title: 'Infrastructure & Scaling', component: InfrastructureScaling },
-  { id: 'usability', title: 'Usability Testing Plan', component: UsabilityTesting },
-  { id: 'schema', title: 'Database Schema', component: DatabaseSchema },
-  { id: 'error', title: 'Error Analysis', component: ErrorAnalysis },
-];
+// Define the available sections
+type Section = {
+  id: string;
+  title: string;
+  component: React.ComponentType;
+};
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('analysis');
-  
-  // Find the active section component to render
-  const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceAnalysis;
+  // Define all available sections
+  const sections: Section[] = [
+    { id: 'performance-fundamentals', title: 'Performance Fundamentals', component: PerformanceFundamentals },
+    { id: 'database-optimization', title: 'Database Optimization', component: DatabaseOptimization },
+    { id: 'backend-performance', title: 'Backend Performance', component: BackendPerformance },
+    { id: 'frontend-optimization', title: 'Frontend Optimization', component: FrontendOptimization },
+    { id: 'infrastructure-scaling', title: 'Infrastructure & Scaling', component: InfrastructureScaling },
+    { id: 'performance-analysis', title: 'Performance Analysis', component: PerformanceAnalysis },
+    { id: 'database-schema', title: 'Database Schema', component: DatabaseSchema },
+    { id: 'error-analysis', title: 'Error Analysis', component: ErrorAnalysis },
+    { id: 'usability-testing', title: 'Usability Testing Plan', component: UsabilityTestingPlan },
+  ];
+
+  // Track the active section
+  const [activeSection, setActiveSection] = useState('usability-testing');
+
+  // Find the active section component
+  const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceFundamentals;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       <GuideHeader />
       
-      <div className="container mx-auto px-4 py-6 md:px-6">
-        <main className="flex flex-col lg:flex-row gap-8">
-          {/* Side Navigation */}
-          <div className="lg:w-1/4">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Sidebar with navigation */}
+          <div className="md:w-1/4">
             <SectionNavigation 
-              sections={sections} 
-              activeSection={activeSection} 
-              setActiveSection={setActiveSection} 
+              sections={sections}
+              activeSection={activeSection}
+              setActiveSection={setActiveSection}
             />
           </div>
           
-          {/* Main Content */}
-          <div className="lg:w-3/4 bg-white rounded-lg shadow-md p-6">
+          {/* Main content area */}
+          <div className="md:w-3/4 bg-white p-6 rounded-lg shadow-sm">
             <ActiveSectionComponent />
           </div>
-        </main>
-        
-        <Footer />
+        </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };
