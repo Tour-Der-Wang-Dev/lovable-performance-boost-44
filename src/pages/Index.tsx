@@ -7,22 +7,28 @@ import DatabaseOptimization from '../components/sections/DatabaseOptimization';
 import BackendPerformance from '../components/sections/BackendPerformance';
 import FrontendOptimization from '../components/sections/FrontendOptimization';
 import InfrastructureScaling from '../components/sections/InfrastructureScaling';
+import PerformanceAnalysis from '../components/PerformanceAnalysis';
+import DatabaseSchema from '../components/DatabaseSchema';
+import ErrorAnalysis from '../components/ErrorAnalysis';
 import Footer from '../components/Footer';
 
 // Define all available sections
 const sections = [
+  { id: 'analysis', title: 'Performance Analysis Report', component: PerformanceAnalysis },
   { id: 'fundamentals', title: 'Performance Fundamentals', component: PerformanceFundamentals },
   { id: 'database', title: 'Database Optimization', component: DatabaseOptimization },
   { id: 'backend', title: 'Backend Performance', component: BackendPerformance },
   { id: 'frontend', title: 'Frontend Optimization', component: FrontendOptimization },
   { id: 'infrastructure', title: 'Infrastructure & Scaling', component: InfrastructureScaling },
+  { id: 'schema', title: 'Database Schema', component: DatabaseSchema },
+  { id: 'error', title: 'Error Analysis', component: ErrorAnalysis },
 ];
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState('fundamentals');
+  const [activeSection, setActiveSection] = useState('analysis');
   
   // Find the active section component to render
-  const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceFundamentals;
+  const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceAnalysis;
 
   return (
     <div className="min-h-screen bg-gray-50">
