@@ -3,6 +3,7 @@ import { signInWithGitHub } from '@/services/authService';
 import { Button } from '@/components/ui/button';
 import { Github } from 'lucide-react';
 import { useState } from 'react';
+import { toast } from '@/hooks/use-toast';
 
 interface GitHubLoginButtonProps {
   redirectTo?: string;
@@ -19,9 +20,14 @@ const GitHubLoginButton = ({
     try {
       setIsLoading(true);
       await signInWithGitHub(redirectTo);
+      // Toast won't show immediately as the page will redirect
     } catch (error) {
       console.error('Login failed:', error);
-    } finally {
+      toast({
+        title: 'Login Failed',
+        description: error instanceof Error ? error.message : 'Failed to login with GitHub',
+        variant: 'destructive',
+      });
       setIsLoading(false);
     }
   };
