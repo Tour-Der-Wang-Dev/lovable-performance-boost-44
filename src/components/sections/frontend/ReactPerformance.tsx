@@ -16,6 +16,10 @@ const ReactPerformance = () => {
     return price * 0.1; // Sample discount calculation
   };
 
+  // Define product and discount variables used in the virtualized list example
+  const exampleProduct = sampleProduct;
+  const exampleDiscount = calculateDiscount(sampleProduct.price);
+
   return (
     <div className="mb-8">
       <h3 className="text-xl font-semibold mb-4 text-orange-600">React Performance Techniques</h3>
@@ -139,7 +143,7 @@ function ProductList({ products }) {
     const product = products[index];
     return (
       <div style={style}>
-        <ProductItem product={product} />
+        <ProductItem product={exampleProduct} />
       </div>
     );
   };
