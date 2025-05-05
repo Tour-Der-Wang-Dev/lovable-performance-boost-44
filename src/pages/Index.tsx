@@ -7,7 +7,7 @@ import DatabaseOptimization from '../components/sections/DatabaseOptimization';
 import BackendPerformance from '../components/sections/BackendPerformance';
 import FrontendOptimization from '../components/sections/FrontendOptimization';
 import InfrastructureScaling from '../components/sections/InfrastructureScaling';
-import PerformanceAnalysis from '../components/PerformanceAnalysis';
+import PerformanceAnalysis from '../components/sections/PerformanceAnalysis';
 import DatabaseSchema from '../components/DatabaseSchema';
 import ErrorAnalysis from '../components/ErrorAnalysis';
 import Footer from '../components/Footer';
