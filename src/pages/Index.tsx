@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import GuideHeader from '@/components/GuideHeader';
 import SectionNavigation from '@/components/SectionNavigation';
@@ -10,6 +11,7 @@ import PerformanceAnalysis from '@/components/sections/PerformanceAnalysis';
 import DatabaseSchema from '@/components/DatabaseSchema';
 import ErrorAnalysis from '@/components/ErrorAnalysis';
 import UsabilityTestingPlan from '@/components/UsabilityTestingPlan';
+import VibeCoding from '@/components/VibeCoding';
 import Footer from '@/components/Footer';
 import Navbar from "@/components/Navbar";
 
@@ -32,10 +34,11 @@ const Index = () => {
     { id: 'database-schema', title: 'Database Schema', component: DatabaseSchema },
     { id: 'error-analysis', title: 'Error Analysis', component: ErrorAnalysis },
     { id: 'usability-testing', title: 'Usability Testing Plan', component: UsabilityTestingPlan },
+    { id: 'vibe-coding', title: 'Vibe Coding', component: VibeCoding },
   ];
 
-  // Track the active section
-  const [activeSection, setActiveSection] = useState('usability-testing');
+  // Track the active section - default to the new vibe coding section
+  const [activeSection, setActiveSection] = useState('vibe-coding');
 
   // Find the active section component
   const ActiveSectionComponent = sections.find(section => section.id === activeSection)?.component || PerformanceFundamentals;
