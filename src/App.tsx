@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
+import GitLabPage from "./pages/GitLabPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
               {/* Public routes */}
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<AuthPage />} />
+              <Route path="/gitlab" element={<GitLabPage />} />
               
               {/* Protected routes */}
               <Route path="/dashboard" element={<Dashboard />} />
