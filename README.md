@@ -1,73 +1,152 @@
-# Welcome to your Lovable project
 
-## Project info
+# Performance Optimization Guide
 
-**URL**: https://lovable.dev/projects/81ee32a4-0703-4082-a43a-f7a9c6ec652b
+![Project Banner](https://lovable.dev/projects/81ee32a4-0703-4082-a43a-f7a9c6ec652b)
 
-## How can I edit this code?
+A comprehensive web application providing detailed guidance on performance optimization strategies across frontend, backend, database, and infrastructure layers.
 
-There are several ways of editing your application.
+## 🚀 Live Demo
 
-**Use Lovable**
+Visit the live application: [Performance Optimization Guide](https://lovable.dev/projects/81ee32a4-0703-4082-a43a-f7a9c6ec652b)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/81ee32a4-0703-4082-a43a-f7a9c6ec652b) and start prompting.
+## 📋 Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Performance Fundamentals**: Core concepts and principles of application performance
+- **Database Optimization**: Techniques for efficient database design and queries
+- **Backend Performance**: Strategies for optimizing server-side code and APIs
+- **Frontend Optimization**: Methods for improving client-side performance and user experience
+- **Infrastructure & Scaling**: Approaches for scaling infrastructure to handle increased load
+- **Authentication**: Secure user authentication via GitHub OAuth
+- **Personalized Dashboard**: User-specific content and settings
+- **Responsive Design**: Optimized for all device sizes
 
-**Use your preferred IDE**
+## 🛠️ Technologies Used
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **Frontend**:
+  - React 18 (with TypeScript)
+  - Tailwind CSS for styling
+  - shadcn/ui component library
+  - react-router-dom for routing
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Authentication & Backend**:
+  - Supabase for authentication and database
+  - GitHub OAuth integration
 
-Follow these steps:
+- **State Management**:
+  - React Context API
+  - TanStack Query for data fetching
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Build Tools**:
+  - Vite for fast development and optimized builds
+  - TypeScript for type safety
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🏁 Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Prerequisites
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+- Node.js & npm - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Git
+
+### Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/performance-optimization-guide.git
+   cd performance-optimization-guide
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add:
+   ```
+   PROVIDER_NAME=your_provider_name
+   PROVIDER_ENABLED=true
+   ```
+
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
+
+5. Open your browser and navigate to:
+   ```
+   http://localhost:5173
+   ```
+
+## 📦 Project Structure
+
+The project follows a modular architecture with focused components:
+
+```
+src/
+├── components/       # UI components
+│   ├── sections/     # Guide section components
+│   └── ui/           # Reusable UI components
+├── context/          # React context providers
+├── hooks/            # Custom React hooks
+├── integrations/     # External service integrations
+├── lib/              # Utility functions
+├── pages/            # Page components
+└── services/         # Business logic and API services
 ```
 
-**Edit a file directly in GitHub**
+For a detailed breakdown of all files and their purpose, see [filesExplainer.md](./filesExplainer.md).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🔄 Available Scripts
 
-**Use GitHub Codespaces**
+For a comprehensive list of available npm scripts and their usage, see [scripts.md](./scripts.md).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🤝 Contributing
 
-## What technologies are used for this project?
+We welcome contributions to improve the Performance Optimization Guide!
 
-This project is built with:
+1. Fork the repository
+2. Create your feature branch:
+   ```sh
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes:
+   ```sh
+   git commit -m 'Add some amazing feature'
+   ```
+4. Push to the branch:
+   ```sh
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Please ensure your code follows the project's coding standards and includes appropriate tests.
 
-## How can I deploy this project?
+## 📊 System Architecture
 
-Simply open [Lovable](https://lovable.dev/projects/81ee32a4-0703-4082-a43a-f7a9c6ec652b) and click on Share -> Publish.
+The application follows a client-side architecture with Supabase handling authentication and database functionality:
 
-## Can I connect a custom domain to my Lovable project?
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │
+│  React Frontend │────▶│ Supabase Auth   │────▶│   GitHub OAuth  │
+│                 │     │                 │     │                 │
+└────────┬────────┘     └─────────────────┘     └─────────────────┘
+         │
+         │
+         ▼
+┌─────────────────┐
+│                 │
+│ Supabase Client │
+│                 │
+└─────────────────┘
+```
 
-Yes, you can!
+For a more detailed architecture diagram, see the [System Architecture](#) section.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📄 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 📧 Contact
+
+Project Link: [https://github.com/yourusername/performance-optimization-guide](https://github.com/yourusername/performance-optimization-guide)
